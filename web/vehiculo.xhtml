@@ -57,14 +57,14 @@
                         <h:commandButton value="Elimnar" class="btn btn-danger"/>
                     </h:column>
                 </h:dataTable>
-                    <h:commandButton value="Agregar" class="btn btn-success" type="button" onclick="PF('agregar').show()"/>
-                <p:dialog header="Modal Dialog" widgetVar="agregar" modal="true" height="100">
-                    <h:outputText value="This is a Modal Dialog." />
-                </p:dialog>
                 </h:form>
+                
+                <p:commandButton value="Agregar" type="button" class="btn btn-success" onclick="PF('agregar').show();"/>
+                <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+                    <h:outputText value="Resistance to PrimeFaces is futile!" />
+                </p:dialog>
             </ui:define>
 
         </ui:composition>
-
     </body>
 </html>
