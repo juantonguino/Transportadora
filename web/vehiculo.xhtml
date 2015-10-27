@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./Template.xhtml">
+
+            <ui:define name="content">
+                <h:form>
+                <h:dataTable value="#{vehiculoBean.vehiculos}" var="vehiculo" class="table">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Placa"/>
+                        </f:facet>
+                        <h:outputLabel value="#{vehiculo.placa}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Linea"/>
+                        </f:facet>
+                        <h:outputLabel value="#{vehiculo.linea}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Marca"/>
+                        </f:facet>
+                        <h:outputLabel value="#{vehiculo.marca}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Modelo"/>
+                        </f:facet>
+                        <h:outputLabel value="#{vehiculo.modelo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Propietario"/>
+                        </f:facet>
+                        <h:outputLabel value="#{vehiculo.propietario}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Capasidad"/>
+                        </f:facet>
+                        <h:outputLabel value="#{vehiculo.capacidad}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Opciones"/>
+                        </f:facet>
+                        <h:commandButton value="Modificar" class="btn btn-warning"/>
+                        <h:commandButton value="Elimnar" class="btn btn-danger"/>
+                    </h:column>
+                </h:dataTable>
+                <h:commandButton value="Agregar" class="btn btn-success"/>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>
