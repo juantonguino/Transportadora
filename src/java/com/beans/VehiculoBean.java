@@ -26,6 +26,8 @@ public class VehiculoBean {
     
     private static List<Vehiculo> vehiculos;
     
+    private VehiculoJpaController controlador;
+    
     /**
      * Creates a new instance of VehiculoBean
      */
@@ -33,7 +35,7 @@ public class VehiculoBean {
         vehiculoModificar= new Vehiculo("", "", "", 0, "", 0);
         vehiculoAgregar= new Vehiculo("", "", "", 0, "", 0);
         vehiculos= new ArrayList<>();
-        VehiculoJpaController controlador = new VehiculoJpaController();
+        controlador = new VehiculoJpaController();
         controlador.findVehiculoEntities();
     }
 
