@@ -54,9 +54,9 @@
                         <f:facet name="header">
                             <h:outputLabel value="Opciones"/>
                         </f:facet>
+                        <p:commandButton value="Ver Servicios" class="btn btn-info" actionListener="#{vehiculoBean.verServicios(vehiculo)}"/>
                         <p:commandButton value="Modificar" class="btn btn-warning"/>
-                        <p:commandButton value="Elimnar" class="btn btn-danger"/>
-                        <p:commandButton value="Ver Servicios" class="btn btn-info" />
+                        <p:commandButton value="Elimnar" class="btn btn-danger" actionListener="#{vehiculoBean.eliminarVehiculo(vehiculo)}"/>
                     </h:column>
                 </h:dataTable>
                     <p:commandButton value="Agregar" type="button" class="btn btn-success" onclick="PF('agregar').show();"/>
