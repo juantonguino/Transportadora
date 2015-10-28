@@ -2,14 +2,66 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
     <body>
 
         <ui:composition template="./Template.xhtml">
 
             <ui:define name="content">
-                
+                <h:form>
+                    <h3>Servicios <h:outputLabel value="#{servicioBean.placa}"/></h3>
+                    <h:dataTable value="#{servicioBean.servicios}" var="objeto" class="table table-bordered">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Placa"/>
+                        </f:facet>
+                        <h:outputLabel value="#{vehiculo.placa}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Linea"/>
+                        </f:facet>
+                        <h:outputLabel value="#{vehiculo.linea}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Marca"/>
+                        </f:facet>
+                        <h:outputLabel value="#{vehiculo.marca}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Modelo"/>
+                        </f:facet>
+                        <h:outputLabel value="#{vehiculo.modelo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Propietario"/>
+                        </f:facet>
+                        <h:outputLabel value="#{vehiculo.propietario}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Capasidad"/>
+                        </f:facet>
+                        <h:outputLabel value="#{vehiculo.capacidad}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Opciones"/>
+                        </f:facet>
+                        <p:commandButton value="Ver Servicios" class="btn btn-info" actionListener="#{vehiculoBean.verServicios(vehiculo)}"/>
+                        <p:commandButton value="Transferir" class="btn btn-primary" />
+                        <p:commandButton value="Modificar" class="btn btn-warning"/>
+                        <p:commandButton value="Elimnar" class="btn btn-danger" actionListener="#{vehiculoBean.eliminarVehiculo(vehiculo)}"/>
+                    </h:column>
+                </h:dataTable>
+                    <p:commandButton value="Agregar" type="button" class="btn btn-success" onclick="PF('agregar').show();"/>
+                </h:form>
             </ui:define>
 
         </ui:composition>

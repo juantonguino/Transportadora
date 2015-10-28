@@ -60,12 +60,11 @@
                         <p:commandButton value="Elimnar" class="btn btn-danger" actionListener="#{vehiculoBean.eliminarVehiculo(vehiculo)}"/>
                     </h:column>
                 </h:dataTable>
-                    <p:commandButton value="Agregar" type="button" class="btn btn-success" onclick="PF('agregar').show();"/>
-                </h:form>
+                    
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                 
-                <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
-                    <h:outputText value="Resistance to PrimeFaces is futile!" />
-                </p:dialog>
+                <p:commandButton value="Agregar" type="button" class="btn btn-success" onclick="PF('agregar').show();"/>               
+                </h:form>
             </ui:define>
 
         </ui:composition>

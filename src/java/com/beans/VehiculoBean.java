@@ -11,6 +11,7 @@ import com.controllers.exceptions.NonexistentEntityException;
 import com.entities.Vehiculo;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -80,14 +81,14 @@ public class VehiculoBean {
         }
     }
     
-    public void eliminarVehiculo(Vehiculo v) throws IllegalOrphanException, NonexistentEntityException{
-        controlador.destroy(v.getPlaca());
+    public void eliminarVehiculo(Vehiculo v){
         try{
+            controlador.destroy(v.getPlaca());
             FacesContext contex= FacesContext.getCurrentInstance();
             contex.getExternalContext().redirect("vehiculo.xhtml");
         }
         catch(Exception e){
-            e.printStackTrace();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "System Error"));
         }
     }
 }

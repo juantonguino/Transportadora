@@ -46,5 +46,37 @@ public class ServicioBean {
             servicios.add(s);
         }
     }
+
+    public Servicio getServicioModificar() {
+        return servicioModificar;
+    }
+
+    public void setServicioModificar(Servicio servicioModificar) {
+        this.servicioModificar = servicioModificar;
+    }
+
+    public Servicio getServicioAgregar() {
+        return servicioAgregar;
+    }
+
+    public void setServicioAgregar(Servicio servicioAgregar) {
+        this.servicioAgregar = servicioAgregar;
+    }
+
+    public List<Servicio> getServicios() {
+        return servicios;
+    }
+
+    public void setServicios(List<Servicio> servicios) {
+        ServicioBean.servicios = servicios;
+    }
+
+    public String getPlaca() {
+        return placa;
+    }
+
+    public void setPlaca(String placa) {
+        this.placa = placa;
+    }
     
 }
