@@ -53,13 +53,13 @@
                         <f:facet name="header">
                             <h:outputLabel value="Opciones"/>
                         </f:facet>
-                        <h:commandButton value="Modificar" class="btn btn-warning"/>
-                        <h:commandButton value="Elimnar" class="btn btn-danger"/>
+                        <p:commandButton value="Modificar" class="btn btn-warning"/>
+                        <p:commandButton value="Elimnar" class="btn btn-danger"/>
                     </h:column>
                 </h:dataTable>
+                    <p:commandButton value="Agregar" type="button" class="btn btn-success" onclick="PF('agregar').show();"/>
                 </h:form>
                 
-                <p:commandButton value="Agregar" type="button" class="btn btn-success" onclick="PF('agregar').show();"/>
                 <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
                     <h:outputText value="Resistance to PrimeFaces is futile!" />
                 </p:dialog>

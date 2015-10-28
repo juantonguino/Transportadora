@@ -36,7 +36,10 @@ public class VehiculoBean {
         vehiculoAgregar= new Vehiculo("", "", "", 0, "", 0);
         vehiculos= new ArrayList<>();
         controlador = new VehiculoJpaController();
-        controlador.findVehiculoEntities();
+        List<Vehiculo> lista = controlador.findVehiculoEntities();
+        for(Vehiculo v: lista){
+            vehiculos.add(v);
+        }
     }
 
     public Vehiculo getVehiculoModificar() {
