@@ -5,8 +5,14 @@
  */
 package com.beans;
 
+import com.controllers.ServicioJpaController;
+import com.entities.Servicio;
+import java.util.ArrayList;
+import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  *
@@ -15,11 +21,30 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean
 @RequestScoped
 public class ServicioBean {
-
+    
+    private Servicio servicioModificar;
+    
+    private Servicio servicioAgregar;
+    
+    private static List<Servicio> servicios;
+    
+    private ServicioJpaController controlador;
+    
+    private String placa;
+    
     /**
-     * Creates a new instance of ServicioBean
+     * Creates a new instance of VehiculoBean
      */
     public ServicioBean() {
+        servicioModificar= new Servicio(0, "", null, null, null, null, "");
+        servicioAgregar= new Servicio(0, "", null, null, null, null, "");
+        placa=((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("placa");
+        servicios= new ArrayList<>();
+        controlador = new ServicioJpaController();
+        List<Servicio> lista = controlador.findServicioEntities();
+        for(Servicio s: lista){
+            servicios.add(s);
+        }
     }
     
 }
