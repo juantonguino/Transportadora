@@ -35,4 +35,13 @@ public class TransaccionBean {
             transacciones.add(t);
         }
     }
+
+    public List<Transacciones> getTransacciones() {
+        return transacciones;
+    }
+
+    public void setTransacciones(List<Transacciones> transacciones) {
+        TransaccionBean.transacciones = transacciones;
+    }
+    
 }
