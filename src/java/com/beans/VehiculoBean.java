@@ -88,7 +88,12 @@ public class VehiculoBean {
             contex.getExternalContext().redirect("vehiculo.xhtml");
         }
         catch(Exception e){
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "System Error"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No se puede eliminar Vehiculo"));
         }
+    }
+    
+    public String modificar(Vehiculo v){
+        vehiculoModificar=v;
+        return "PF('modificar').show();";
     }
 }
