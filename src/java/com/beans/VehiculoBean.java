@@ -5,10 +5,15 @@
  */
 package com.beans;
 
+import com.controllers.ServicioJpaController;
+import com.controllers.SucursalJpaController;
+import com.controllers.TransaccionesJpaController;
 import com.controllers.VehiculoJpaController;
 import com.controllers.exceptions.IllegalOrphanException;
 import com.controllers.exceptions.NonexistentEntityException;
+import com.entities.Sucursal;
 import com.entities.Vehiculo;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -28,7 +33,11 @@ public class VehiculoBean {
     
     private Vehiculo vehiculoAgregar;
     
+    private Sucursal sucursalSeleccionada;
+    
     private static List<Vehiculo> vehiculos;
+    
+    private static List<Sucursal> sucursales;
     
     private VehiculoJpaController controlador;
     
@@ -41,6 +50,8 @@ public class VehiculoBean {
         vehiculos= new ArrayList<>();
         controlador = new VehiculoJpaController();
         List<Vehiculo> lista = controlador.findVehiculoEntities();
+        SucursalJpaController sucursalC= new SucursalJpaController();
+        sucursales=sucursalC.findSucursalEntities();
         for(Vehiculo v: lista){
             vehiculos.add(v);
         }
@@ -67,7 +78,23 @@ public class VehiculoBean {
     }
 
     public void setVehiculos(List<Vehiculo> vehiculos) {
-        VehiculoBean.vehiculos = vehiculos;
+        this.vehiculos = vehiculos;
+    }
+
+    public List<Sucursal> getSucursales() {
+        return sucursales;
+    }
+
+    public void setSucursales(List<Sucursal> sucursales) {
+        this.sucursales = sucursales;
+    }
+
+    public Sucursal getSucursalSeleccionada() {
+        return sucursalSeleccionada;
+    }
+
+    public void setSucursalSeleccionada(Sucursal sucursalSeleccionada) {
+        this.sucursalSeleccionada = sucursalSeleccionada;
     }
     
     public void verServicios(Vehiculo v){
@@ -92,8 +119,33 @@ public class VehiculoBean {
         }
     }
     
-    public String modificar(Vehiculo v){
-        vehiculoModificar=v;
-        return "PF('modificar').show();";
+    public void agregar(){
+        try{
+            SucursalJpaController sucursalControl = new SucursalJpaController();
+            Sucursal s=sucursalControl.findSucursal(SucursalBean.ID_SUCURSAL);
+            vehiculoAgregar.setSucursalId(s);
+            controlador.create(vehiculoAgregar);
+            FacesContext contex= FacesContext.getCurrentInstance();
+            contex.getExternalContext().redirect("vehiculo.xhtml");
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No se puede agregar Vehiculo"));
+        }
+    }
+    
+    public void modificar(){
+        try{
+            SucursalJpaController sucursalControl = new SucursalJpaController();
+            Sucursal s=sucursalControl.findSucursal(SucursalBean.ID_SUCURSAL);
+            vehiculoModificar.setSucursalId(s);
+            vehiculoModificar.setTransaccionesList(new ArrayList<>());
+            vehiculoModificar.setServicioList(new ArrayList<>());
+            controlador.edit(vehiculoModificar);
+            FacesContext contex= FacesContext.getCurrentInstance();
+            contex.getExternalContext().redirect("vehiculo.xhtml");
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No se puede modificar Vehiculo"));
+        }
     }
 }
