@@ -13,122 +13,122 @@
             <ui:define name="content">
                 <h:form>
                     <h3>Vehiculos</h3>
-                <h:dataTable value="#{vehiculoBean.vehiculos}" var="vehiculo" class="table table-bordered">
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputLabel value="Placa"/>
-                        </f:facet>
-                        <h:outputLabel value="#{vehiculo.placa}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputLabel value="Linea"/>
-                        </f:facet>
-                        <h:outputLabel value="#{vehiculo.linea}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputLabel value="Marca"/>
-                        </f:facet>
-                        <h:outputLabel value="#{vehiculo.marca}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputLabel value="Modelo"/>
-                        </f:facet>
-                        <h:outputLabel value="#{vehiculo.modelo}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputLabel value="Propietario"/>
-                        </f:facet>
-                        <h:outputLabel value="#{vehiculo.propietario}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputLabel value="Capasidad"/>
-                        </f:facet>
-                        <h:outputLabel value="#{vehiculo.capacidad}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
-                            <h:outputLabel value="Opciones"/>
-                        </f:facet>
-                        <p:commandButton value="Ver Servicios" class="btn btn-info" actionListener="#{vehiculoBean.verServicios(vehiculo)}"/>
-                        <p:commandButton value="Transferir" class="btn btn-primary" update=":transferir" oncomplete="PF('transferir').show();">
-                            <f:setPropertyActionListener value="#{vehiculo}" target="#{vehiculoBean.vehiculoTransferir}" />
-                        </p:commandButton>
-                        <p:commandButton value="Modificar" class="btn btn-warning" update=":modificarvehiculo" oncomplete="PF('modificar').show();">
-                            <f:setPropertyActionListener value="#{vehiculo}" target="#{vehiculoBean.vehiculoModificar}" />
-                        </p:commandButton>
-                        <p:commandButton value="Elimnar" class="btn btn-danger" actionListener="#{vehiculoBean.eliminarVehiculo(vehiculo)}"/>
-                    </h:column>
-                </h:dataTable>
-                    
-                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-                <p:commandButton value="Agregar" type="button" class="btn btn-success" onclick="PF('agregar').show();"/>
-                
+                    <h:dataTable value="#{vehiculoBean.vehiculos}" var="vehiculo" class="table table-bordered">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Placa"/>
+                            </f:facet>
+                            <h:outputLabel value="#{vehiculo.placa}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Linea"/>
+                            </f:facet>
+                            <h:outputLabel value="#{vehiculo.linea}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Marca"/>
+                            </f:facet>
+                            <h:outputLabel value="#{vehiculo.marca}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Modelo"/>
+                            </f:facet>
+                            <h:outputLabel value="#{vehiculo.modelo}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Propietario"/>
+                            </f:facet>
+                            <h:outputLabel value="#{vehiculo.propietario}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Capasidad"/>
+                            </f:facet>
+                            <h:outputLabel value="#{vehiculo.capacidad}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputLabel value="Opciones"/>
+                            </f:facet>
+                            <p:commandButton value="Ver Servicios" class="btn btn-info" actionListener="#{vehiculoBean.verServicios(vehiculo)}"/>
+                            <p:commandButton value="Transferir" class="btn btn-primary" update=":transferir" oncomplete="PF('transferir').show();">
+                                <f:setPropertyActionListener value="#{vehiculo}" target="#{vehiculoBean.vehiculoTransferir}" />
+                            </p:commandButton>
+                            <p:commandButton value="Modificar" class="btn btn-warning" update=":modificarvehiculo" oncomplete="PF('modificar').show();">
+                                <f:setPropertyActionListener value="#{vehiculo}" target="#{vehiculoBean.vehiculoModificar}" />
+                            </p:commandButton>
+                            <p:commandButton value="Elimnar" class="btn btn-danger" actionListener="#{vehiculoBean.eliminarVehiculo(vehiculo)}"/>
+                        </h:column>
+                    </h:dataTable>
+
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+                    <p:commandButton value="Agregar" type="button" class="btn btn-success" onclick="PF('agregar').show();"/>
+
                 </h:form>
-                
+
                 <p:dialog header="Agregar" widgetVar="agregar" width="400" modal="true" resizable="false">
                     <h:form id="agregarvehiculo">
                         <p:panelGrid columns="2">
-                            
+
                             <p:outputLabel value="Placa:" for="placa"/>
                             <p:inputText id="placa" required="true" value="#{vehiculoBean.vehiculoAgregar.placa}"/>
-                            
+
                             <p:outputLabel value="Linea:" for="linea"/>
                             <p:inputText id="linea" required="true" value="#{vehiculoBean.vehiculoAgregar.linea}"/>
-       
+
                             <p:outputLabel value="Marca:" for="marca"/>
                             <p:inputText id="marca" required="true" value="#{vehiculoBean.vehiculoAgregar.marca}"/>
 
                             <p:outputLabel value="Modelo:" for="modelo"/>
                             <p:inputText id="modelo" required="true" value="#{vehiculoBean.vehiculoAgregar.modelo}"/>
-                            
+
                             <p:outputLabel value="Propietario:" for="propietario"/>
                             <p:inputText id="propietario" required="true" value="#{vehiculoBean.vehiculoAgregar.propietario}"/>
-                            
+
                             <p:outputLabel value="Capasidad:" for="capasidad"/>
                             <p:inputText id="capasidad" required="true" value="#{vehiculoBean.vehiculoAgregar.capacidad}"/>
-                            
+
                         </p:panelGrid>
                         <br/>
-                        
+
                         <p:commandButton value="Agregar" actionListener="#{vehiculoBean.agregar()}" oncomplete="handleSubmit(args,'PF('agregar')');"/>
                         <p:commandButton value="Cancelar" onclick="PF('agregar').hide();"/>
-                        
+
                     </h:form>
                 </p:dialog>
-                
+
                 <p:dialog header="Modificar" widgetVar="modificar" width="500" modal="true" resizable="false">
                     <h:form id="modificarvehiculo">
                         <p:panelGrid columns="2">
-                            
+
                             <p:outputLabel value="Placa:" for="placam"/>
                             <p:inputText id="placam" required="true" value="#{vehiculoBean.vehiculoModificar.placa}"/>
-                            
+
                             <p:outputLabel value="Linea:" for="lineam"/>
                             <p:inputText id="lineam" required="true" value="#{vehiculoBean.vehiculoModificar.linea}"/>
-       
+
                             <p:outputLabel value="Marca:" for="marcam"/>
                             <p:inputText id="marcam" required="true" value="#{vehiculoBean.vehiculoModificar.marca}"/>
 
                             <p:outputLabel value="Modelo:" for="modelom"/>
                             <p:inputText id="modelom" required="true" value="#{vehiculoBean.vehiculoModificar.modelo}"/>
-                            
+
                             <p:outputLabel value="Propietario:" for="propietariom"/>
                             <p:inputText id="propietariom" required="true" value="#{vehiculoBean.vehiculoModificar.propietario}"/>
-                            
+
                             <p:outputLabel value="Capasidad:" for="capasidadm"/>
                             <p:inputText id="capasidadm" required="true" value="#{vehiculoBean.vehiculoModificar.capacidad}"/>
-                            
+
                         </p:panelGrid>
                         <br/>
-                        
+
                         <p:commandButton value="Modificar" actionListener="#{vehiculoBean.modificar()}" oncomplete="handleSubmit(args,'PF('modificar')');"/>
                         <p:commandButton value="Cancelar" onclick="PF('modificar').hide();"/>
-                        
+
                     </h:form>
                 </p:dialog>
                 <p:dialog header="Transferir" widgetVar="transferir" width="400" modal="true" resizable="false">
@@ -144,7 +144,7 @@
                         <br/>
                         <p:commandButton value="Transferir" actionListener="#{vehiculoBean.transferir()}" oncomplete="handleSubmit(args,'PF('transferir')');"/>
                         <p:commandButton value="Cancelar" onclick="PF('transferir').hide();"/>
-                        
+
                     </h:form>
                 </p:dialog>
             </ui:define>
