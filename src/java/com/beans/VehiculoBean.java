@@ -33,6 +33,8 @@ public class VehiculoBean {
     
     private Vehiculo vehiculoAgregar;
     
+    private Vehiculo vehiculoTransferir;
+    
     private Sucursal sucursalSeleccionada;
     
     private static List<Vehiculo> vehiculos;
@@ -47,13 +49,21 @@ public class VehiculoBean {
     public VehiculoBean() {
         vehiculoModificar= new Vehiculo("", "", "", 0, "", 0);
         vehiculoAgregar= new Vehiculo("", "", "", 0, "", 0);
+        vehiculoTransferir= new Vehiculo("", "", "", 0, "", 0);
+        sucursalSeleccionada=new Sucursal(0, "");
         vehiculos= new ArrayList<>();
+        sucursales=new ArrayList<>();
         controlador = new VehiculoJpaController();
         List<Vehiculo> lista = controlador.findVehiculoEntities();
         SucursalJpaController sucursalC= new SucursalJpaController();
-        sucursales=sucursalC.findSucursalEntities();
+        List<Sucursal> sucursalesSeleccion=sucursalC.findSucursalEntities();
         for(Vehiculo v: lista){
-            vehiculos.add(v);
+            if(v.getSucursalId().getId()==SucursalBean.ID_SUCURSAL){
+                vehiculos.add(v);
+            }
+        }
+        for(Sucursal s:sucursalesSeleccion){
+            sucursales.add(s);
         }
     }
 
@@ -95,6 +105,14 @@ public class VehiculoBean {
 
     public void setSucursalSeleccionada(Sucursal sucursalSeleccionada) {
         this.sucursalSeleccionada = sucursalSeleccionada;
+    }
+
+    public Vehiculo getVehiculoTransferir() {
+        return vehiculoTransferir;
+    }
+
+    public void setVehiculoTransferir(Vehiculo vehiculoTransferir) {
+        this.vehiculoTransferir = vehiculoTransferir;
     }
     
     public void verServicios(Vehiculo v){
@@ -147,5 +165,9 @@ public class VehiculoBean {
         catch(Exception e){
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No se puede modificar Vehiculo"));
         }
+    }
+    
+    public void transferir(){
+        vehiculoTransferir.setSucursalId(sucursalSeleccionada);
     }
 }

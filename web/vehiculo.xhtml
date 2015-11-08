@@ -56,7 +56,7 @@
                         </f:facet>
                         <p:commandButton value="Ver Servicios" class="btn btn-info" actionListener="#{vehiculoBean.verServicios(vehiculo)}"/>
                         <p:commandButton value="Transferir" class="btn btn-primary" update=":transferir" oncomplete="PF('transferir').show();">
-                            <f:setPropertyActionListener value="#{vehiculo}" target="#{vehiculoBean.vehiculoModificar}" />
+                            <f:setPropertyActionListener value="#{vehiculo}" target="#{vehiculoBean.vehiculoTransferir}" />
                         </p:commandButton>
                         <p:commandButton value="Modificar" class="btn btn-warning" update=":modificarvehiculo" oncomplete="PF('modificar').show();">
                             <f:setPropertyActionListener value="#{vehiculo}" target="#{vehiculoBean.vehiculoModificar}" />
@@ -135,13 +135,16 @@
                     <h:form id="transferir">
                         <p:panelGrid columns="2">
                             <p:outputLabel value="Placa:" for="placat"/>
-                            <p:inputText id="placat" required="true" value="#{vehiculoBean.vehiculoModificar.placa}"/>
-                            
+                            <p:inputText id="placat" required="true" value="#{vehiculoBean.vehiculoTransferir.placa}"/>
                             <p:outputLabel value="Sucursal:" for="sucursalt"/>
                             <p:selectOneMenu id="sucursalt" value="#{vehiculoBean.sucursalSeleccionada}">
                                 <f:selectItems value="#{vehiculoBean.sucursales}" var="sucursal" itemValue="#{sucursal}" itemLabel="#{sucursal.nombre}"/>
                             </p:selectOneMenu>
                         </p:panelGrid>
+                        <br/>
+                        <p:commandButton value="Transferir" actionListener="#{vehiculoBean.transferir()}" oncomplete="handleSubmit(args,'PF('transferir')');"/>
+                        <p:commandButton value="Cancelar" onclick="PF('transferir').hide();"/>
+                        
                     </h:form>
                 </p:dialog>
             </ui:define>

@@ -16,39 +16,45 @@
                     <h:dataTable value="#{servicioBean.servicios}" var="objeto" class="table table-bordered">
                     <h:column>
                         <f:facet name="header">
-                            <h:outputLabel value="Placa"/>
+                            <h:outputLabel value="Identificaor"/>
                         </f:facet>
-                        <h:outputLabel value="#{vehiculo.placa}"/>
+                        <h:outputLabel value="#{objeto.id}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputLabel value="Linea"/>
+                            <h:outputLabel value="Nombre"/>
                         </f:facet>
-                        <h:outputLabel value="#{vehiculo.linea}"/>
+                        <h:outputLabel value="#{objeto.nombre}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputLabel value="Marca"/>
+                            <h:outputLabel value="Hora Salida"/>
                         </f:facet>
-                        <h:outputLabel value="#{vehiculo.marca}"/>
+                        <h:outputLabel value="#{objeto.horaSalida}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputLabel value="Modelo"/>
+                            <h:outputLabel value="Hora LLegada"/>
                         </f:facet>
-                        <h:outputLabel value="#{vehiculo.modelo}"/>
+                        <h:outputLabel value="#{objeto.horaLlegada}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputLabel value="Propietario"/>
+                            <h:outputLabel value="Fecha Salida"/>
                         </f:facet>
-                        <h:outputLabel value="#{vehiculo.propietario}"/>
+                        <h:outputLabel value="#{objeto.fechaSalida}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputLabel value="Capasidad"/>
+                            <h:outputLabel value="Fecha LLegada"/>
                         </f:facet>
-                        <h:outputLabel value="#{vehiculo.capacidad}"/>
+                        <h:outputLabel value="#{objeto.fechaLlegada}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputLabel value="Tipo Servicio"/>
+                        </f:facet>
+                        <h:outputLabel value="#{objeto.tipoServicio}"/>
                     </h:column>
                     <h:column>
                         <f:facet name="header">
