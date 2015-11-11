@@ -6,11 +6,15 @@
 package com.beans;
 
 import com.controllers.ClienteJpaController;
+import com.controllers.SucursalJpaController;
 import com.entities.Cliente;
+import com.entities.Sucursal;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -38,7 +42,9 @@ public class ClienteBean {
         controlador = new ClienteJpaController();
         List<Cliente> lista = controlador.findClienteEntities();
         for(Cliente c: lista){
-            clientes.add(c);
+            if(c.getSucursalId().getId()==SucursalBean.ID_SUCURSAL){
+                clientes.add(c);
+            }
         }
     }
 
@@ -66,4 +72,44 @@ public class ClienteBean {
         ClienteBean.clientes = clientes;
     }
     
+    public void agregarCliente(){
+        try{
+            SucursalJpaController controladorSucursal = new SucursalJpaController();
+            Sucursal sucursal= controladorSucursal.findSucursal(SucursalBean.ID_SUCURSAL);
+            clienteAgregar.setSucursalId(sucursal);
+            controlador.create(clienteAgregar);
+            FacesContext contex= FacesContext.getCurrentInstance();
+            contex.getExternalContext().redirect("cliente.xhtml");
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No se puede eliminar Vehiculo"));
+        }
+    }
+    
+    public void modificarCliente(){
+        try{
+            if(clienteModificar.getSucursalId()==null){
+                SucursalJpaController controlasorSucursal = new SucursalJpaController();
+                Sucursal sucursal = controlasorSucursal.findSucursal(SucursalBean.ID_SUCURSAL);
+                clienteModificar.setSucursalId(sucursal);
+            }
+            controlador.edit(clienteModificar);
+            FacesContext contex= FacesContext.getCurrentInstance();
+            contex.getExternalContext().redirect("cliente.xhtml");
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No se puede eliminar Vehiculo"));
+        }
+    }
+    
+    public void eliminarCliente(Cliente cliente){
+         try{
+            controlador.destroy(cliente.getIdentificacion());
+            FacesContext contex= FacesContext.getCurrentInstance();
+            contex.getExternalContext().redirect("cliente.xhtml");
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No se puede eliminar Evento"));
+        }
+    }
 }

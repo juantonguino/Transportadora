@@ -48,8 +48,10 @@
                             <f:facet name="header">
                                 <h:outputLabel value="Opciones"/>
                             </f:facet>
-                            <p:commandButton value="Modificar" class="btn btn-warning"/>
-                            <p:commandButton value="Elimnar" class="btn btn-danger"/>
+                            <p:commandButton value="Modificar" class="btn btn-warning" oncomplete="PF('modificar').show()" title="View" update=":modificarCliente">
+                                <f:setPropertyActionListener value="#{objeto}" target="#{clienteBean.clienteModificar}" />
+                            </p:commandButton>
+                            <p:commandButton value="Elimnar" class="btn btn-danger" actionListener="#{clienteBean.eliminarCliente(objeto)}"/>
                         </h:column>
                     </h:dataTable>
                     <p:commandButton value="Agregar" type="button" class="btn btn-success" onclick="PF('agregar').show();"/>
@@ -57,21 +59,50 @@
                 <p:dialog header="Agregar" widgetVar="agregar" width="400" modal="true" resizable="false">
                     <h:form id="agregarCliente">
                         <p:panelGrid columns="2">
-                            <h:outputLabel value="Identificacion" for="idcliente"/>
-                            <h:inputText id="idcliente" />
+                            <h:outputLabel value="Identificacion"/>
+                            <h:inputText required="true" value="#{clienteBean.clienteAgregar.identificacion}"/>
                             
                             <h:outputLabel value="Nombres"/>
-                            <h:inputText/>
+                            <h:inputText required="true" value="#{clienteBean.clienteAgregar.nombres}"/>
                             
                             <h:outputLabel value="Apellidos"/>
-                            <h:inputText />
+                            <h:inputText required="true" value="#{clienteBean.clienteAgregar.apellidos}"/>
                             
                             <h:outputLabel value="Direccion"/>
-                            <h:inputText/>
+                            <h:inputText required="true" value="#{clienteBean.clienteAgregar.direccion}"/>
                             
-                            <h:outputLabel value="telefono"/>
-                            <h:inputText
+                            <h:outputLabel value="Telefono"/>
+                            <h:inputText required="true" value="#{clienteBean.clienteAgregar.telefono}"/>
+                            
+                            
                         </p:panelGrid>
+                        <br/>
+                        <p:commandButton value="Agregar" oncomplete="handleSubmit(args,'PF('agregar')');" actionListener="#{clienteBean.agregarCliente()}"/>
+                        <p:commandButton value="Cancelar" onclick="PF('agregar').hide();"/>
+                    </h:form>
+                </p:dialog>
+                <p:dialog header="Modificar" widgetVar="modificar" width="400" modal="true" resizable="false">
+                    <h:form id="modificarCliente">
+                        <p:panelGrid columns="2">
+                            <h:outputLabel value="Identificacion"/>
+                            <h:inputText required="true" value="#{clienteBean.clienteModificar.identificacion}"/>
+                            
+                            <h:outputLabel value="Nombres"/>
+                            <h:inputText required="true" value="#{clienteBean.clienteModificar.nombres}"/>
+                            
+                            <h:outputLabel value="Apellidos"/>
+                            <h:inputText required="true" value="#{clienteBean.clienteModificar.apellidos}"/>
+                            
+                            <h:outputLabel value="Direccion"/>
+                            <h:inputText required="true" value="#{clienteBean.clienteModificar.direccion}"/>
+                            
+                            <h:outputLabel value="Telefono"/>
+                            <h:inputText required="true" value="#{clienteBean.clienteModificar.telefono}"/>
+                            
+                        </p:panelGrid>
+                        <br/>
+                        <p:commandButton value="Modificar" oncomplete="handleSubmit(args,'PF('modificar')');" actionListener="#{clienteBean.modificarCliente()}"/>
+                        <p:commandButton value="Cancelar" onclick="PF('modificar').hide();"/>
                     </h:form>
                 </p:dialog>
             </ui:define>

@@ -43,7 +43,9 @@ public class ServicioBean {
         controlador = new ServicioJpaController();
         List<Servicio> lista = controlador.findServicioEntities();
         for(Servicio s: lista){
-            servicios.add(s);
+            if(s.getVehiculoPlaca().getPlaca().equals(placa)){
+                servicios.add(s);
+            }
         }
     }
 
@@ -79,4 +81,15 @@ public class ServicioBean {
         this.placa = placa;
     }
     
+    public void agregarServicio(){
+        
+    }
+    
+    public void elminarServicio(Servicio servicio){
+        
+    }
+    
+    public void modificarServicios(){
+        
+    }
 }
