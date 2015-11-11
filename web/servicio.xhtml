@@ -99,6 +99,9 @@
                 <p:dialog header="Modificar" widgetVar="modificar" width="450" modal="true" resizable="false">
                     <h:form id="modificarservicio">
                         <p:panelGrid columns="2">
+                            <h:outputText value="Identificador:"/>
+                            <p:inputText value="#{servicioBean.servicioModificar.id}"/>
+                            
                             <h:outputText value="Nombre:"/>
                             <p:inputText value="#{servicioBean.servicioModificar.nombre}"/>
                             
@@ -119,7 +122,7 @@
                         </p:panelGrid>
                         <br/>
 
-                        <p:commandButton value="Agregar" actionListener="#{servicioBean.modificarServicios()}" oncomplete="handleSubmit(args,'PF('modificar')');"/>
+                        <p:commandButton value="Modificar" actionListener="#{servicioBean.modificarServicios()}" oncomplete="handleSubmit(args,'PF('modificar')');"/>
                         <p:commandButton value="Cancelar" onclick="PF('modificar').hide();"/>
                     </h:form>
                 </p:dialog>
