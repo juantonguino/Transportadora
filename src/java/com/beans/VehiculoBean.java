@@ -12,9 +12,11 @@ import com.controllers.VehiculoJpaController;
 import com.controllers.exceptions.IllegalOrphanException;
 import com.controllers.exceptions.NonexistentEntityException;
 import com.entities.Sucursal;
+import com.entities.Transacciones;
 import com.entities.Vehiculo;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -169,5 +171,24 @@ public class VehiculoBean {
     
     public void transferir(){
         vehiculoTransferir.setSucursalId(sucursalSeleccionada);
+        try{
+            SucursalJpaController sucursalControl = new SucursalJpaController();
+            Sucursal s=sucursalControl.findSucursal(sucursalSeleccionada.getId());
+            Vehiculo v = controlador.findVehiculo(vehiculoTransferir.getPlaca());
+            v.setSucursalId(s);
+            controlador.edit(v);
+            
+            Transacciones transaccionRealizada= new Transacciones(0, new Date());
+            transaccionRealizada.setSucursalId(s);
+            transaccionRealizada.setVehiculoPlaca(v);
+            TransaccionesJpaController controlTansacciones = new TransaccionesJpaController();
+            controlTansacciones.create(transaccionRealizada);
+            
+            FacesContext contex= FacesContext.getCurrentInstance();
+            contex.getExternalContext().redirect("vehiculo.xhtml");
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No se puede transferir Vehiculo"));
+        }
     }
 }

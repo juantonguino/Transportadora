@@ -137,8 +137,8 @@
                             <p:outputLabel value="Placa:" for="placat"/>
                             <p:inputText id="placat" required="true" value="#{vehiculoBean.vehiculoTransferir.placa}"/>
                             <p:outputLabel value="Sucursal:" for="sucursalt"/>
-                            <p:selectOneMenu id="sucursalt" value="#{vehiculoBean.sucursalSeleccionada}">
-                                <f:selectItems value="#{vehiculoBean.sucursales}" var="sucursal" itemValue="#{sucursal}" itemLabel="#{sucursal.nombre}"/>
+                            <p:selectOneMenu id="sucursalt" value="#{vehiculoBean.sucursalSeleccionada.id}">
+                                <f:selectItems value="#{vehiculoBean.sucursales}" var="sucursal" itemValue="#{sucursal.id}" itemLabel="#{sucursal.nombre}"/>
                             </p:selectOneMenu>
                         </p:panelGrid>
                         <br/>
