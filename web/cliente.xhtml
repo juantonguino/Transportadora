@@ -54,6 +54,7 @@
                             <p:commandButton value="Elimnar" class="btn btn-danger" actionListener="#{clienteBean.eliminarCliente(objeto)}"/>
                         </h:column>
                     </h:dataTable>
+                    <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
                     <p:commandButton value="Agregar" type="button" class="btn btn-success" onclick="PF('agregar').show();"/>
                 </h:form>
                 <p:dialog header="Agregar" widgetVar="agregar" width="400" modal="true" resizable="false">

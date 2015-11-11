@@ -6,10 +6,8 @@
 package com.beans;
 
 import com.controllers.ServicioJpaController;
-import com.controllers.SucursalJpaController;
 import com.controllers.VehiculoJpaController;
 import com.entities.Servicio;
-import com.entities.Sucursal;
 import com.entities.Vehiculo;
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,7 +34,7 @@ public class ServicioBean {
     
     private ServicioJpaController controlador;
     
-    private String placa;
+    private static String placa;
     
     /**
      * Creates a new instance of VehiculoBean
@@ -44,7 +42,10 @@ public class ServicioBean {
     public ServicioBean() {
         servicioModificar= new Servicio(0, "", new Date(), new Date(), new Date(), new Date(), "");
         servicioAgregar= new Servicio(0, "", new Date(), new Date(), new Date(), new Date(), "");
-        placa=((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("placa");
+        String temp = ((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("placa");
+        if(temp!=null){
+            placa= temp;
+        }
         servicios= new ArrayList<>();
         controlador = new ServicioJpaController();
         List<Servicio> lista = controlador.findServicioEntities();
