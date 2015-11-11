@@ -103,7 +103,7 @@ public class ClienteBean {
     }
     
     public void eliminarCliente(Cliente cliente){
-         try{
+        try{
             controlador.destroy(cliente.getIdentificacion());
             FacesContext contex= FacesContext.getCurrentInstance();
             contex.getExternalContext().redirect("cliente.xhtml");

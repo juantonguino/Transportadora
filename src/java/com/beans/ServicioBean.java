@@ -6,9 +6,15 @@
 package com.beans;
 
 import com.controllers.ServicioJpaController;
+import com.controllers.SucursalJpaController;
+import com.controllers.VehiculoJpaController;
 import com.entities.Servicio;
+import com.entities.Sucursal;
+import com.entities.Vehiculo;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
@@ -36,8 +42,8 @@ public class ServicioBean {
      * Creates a new instance of VehiculoBean
      */
     public ServicioBean() {
-        servicioModificar= new Servicio(0, "", null, null, null, null, "");
-        servicioAgregar= new Servicio(0, "", null, null, null, null, "");
+        servicioModificar= new Servicio(0, "", new Date(), new Date(), new Date(), new Date(), "");
+        servicioAgregar= new Servicio(0, "", new Date(), new Date(), new Date(), new Date(), "");
         placa=((HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest()).getParameter("placa");
         servicios= new ArrayList<>();
         controlador = new ServicioJpaController();
@@ -82,14 +88,41 @@ public class ServicioBean {
     }
     
     public void agregarServicio(){
-        
+        try{
+            VehiculoJpaController controladorvehiculo = new VehiculoJpaController();
+            Vehiculo v = controladorvehiculo.findVehiculo(placa);
+            servicioAgregar.setVehiculoPlaca(v);
+            controlador.create(servicioAgregar);
+            FacesContext contex= FacesContext.getCurrentInstance();
+            contex.getExternalContext().redirect("servicio.xhtml");
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No se puede agregar Servicio"));
+        }
     }
     
     public void elminarServicio(Servicio servicio){
-        
+        try{
+            controlador.destroy(servicio.getId());
+            FacesContext contex= FacesContext.getCurrentInstance();
+            contex.getExternalContext().redirect("servicio.xhtml");
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No se puede eliminar Servicio"));
+        }
     }
     
     public void modificarServicios(){
-        
+        try{
+            VehiculoJpaController controladorvehiculo = new VehiculoJpaController();
+            Vehiculo v = controladorvehiculo.findVehiculo(placa);
+            servicioModificar.setVehiculoPlaca(v);
+            controlador.edit(servicioModificar);
+            FacesContext contex= FacesContext.getCurrentInstance();
+            contex.getExternalContext().redirect("servicio.xhtml");
+        }
+        catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Fatal!", "No se puede Modificar Servicio"));
+        }
     }
 }
