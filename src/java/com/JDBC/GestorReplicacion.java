@@ -43,9 +43,12 @@ public class GestorReplicacion {
     }
     
     public void changeMasterTo1(String masterLogFile, String Pos){
-        
         String changeMasterTo="CHANGE MASTER TO MASTER_HOST = '192.168.0.202', MASTER_USER = 'user12', MASTER_PASSWORD = 'admin', MASTER_LOG_FILE = '"+masterLogFile+"', MASTER_LOG_POS = "+Pos+";";
-        
     }
-    
+
+    private static String showMasterStatusResultCallService() {
+        com.clientwebservises.PublicacionMaestro_Service service = new com.clientwebservises.PublicacionMaestro_Service();
+        com.clientwebservises.PublicacionMaestro port = service.getPublicacionMaestroPort();
+        return port.showMasterStatus();
+    }
 }
