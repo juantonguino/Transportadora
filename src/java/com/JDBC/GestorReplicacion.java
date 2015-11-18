@@ -18,12 +18,9 @@ import java.util.logging.Logger;
 public class GestorReplicacion {
     
     private FachadaDB fachadaDB;
-    
-    private Connection connection;
 
     public GestorReplicacion() {
         fachadaDB= new FachadaDB();
-        connection= fachadaDB.crearConexion();
     }
     
     public String showMasterStatus(){
