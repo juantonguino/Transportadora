@@ -5,7 +5,12 @@
  */
 package com.webservises;
 
+import com.JDBC.FachadaDB;
 import com.JDBC.GestorReplicacion;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -31,7 +36,23 @@ public class PublicacionMaestro {
     @WebMethod(operationName = "showMasterStatus")
     public String showMasterStatus() {
         //TODO write your implementation code here:
-        GestorReplicacion gestorReplicacion = new GestorReplicacion();
-        return gestorReplicacion.showMasterStatus();
+        FachadaDB fachada= new FachadaDB();
+        try {
+            Connection con = fachada.crearConexion();
+            Statement st = con.createStatement();
+            ResultSet res = st.executeQuery("show master status;");
+            String file="";
+            int position=0;
+            while (res.next()) {                
+                file = res.getString("File");
+                position = res.getInt("Position");   
+            }
+            st.close();
+            fachada.cerrarConexion(con);
+            return file+"/"+position;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 }
