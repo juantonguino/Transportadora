@@ -10,5 +10,5 @@ package com.beans;
  * @author juandiego
  */
 public class SucursalBean {
-    public final static int ID_SUCURSAL=1;
+    public final static int ID_SUCURSAL=3;
 }
