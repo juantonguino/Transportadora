@@ -42,9 +42,7 @@ public class ClienteBean {
         controlador = new ClienteJpaController();
         List<Cliente> lista = controlador.findClienteEntities();
         for(Cliente c: lista){
-            if(c.getSucursalId().getId()==SucursalBean.ID_SUCURSAL){
-                clientes.add(c);
-            }
+            clientes.add(c);
         }
     }
 
