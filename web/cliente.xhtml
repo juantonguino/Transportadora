@@ -46,6 +46,12 @@
                         </h:column>
                         <h:column>
                             <f:facet name="header">
+                                <h:outputLabel value="Sucursal"/>
+                            </f:facet>
+                            <h:outputLabel value="#{objeto.sucursalId.nombre}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
                                 <h:outputLabel value="Opciones"/>
                             </f:facet>
                             <p:commandButton value="Modificar" class="btn btn-warning" oncomplete="PF('modificar').show()" title="View" update=":modificarCliente">
